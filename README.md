@@ -41,54 +41,54 @@ First Tab:
     <button id="toggleTree" class="btn btn-default"></button>
     <input type="text" class="filterinput form-control" placeholder="Search by text">
     <div id="tree-container"></div>
-    /* JSON */
     
-            var mockData = [];
-            mockData.push({
+    /* JSON */
+    var mockData = [];
+    mockData.push({
+        item:{
+            id: 'id1',
+            label: 'test',
+            checked: false
+        },
+        children: [{
+           item:{
+                id: 'id11',
+                label: 'Lorem ipsum dolor 11',
+                checked: false
+            } 
+        },{
+           item:{
+                id: 'id12',
+                label: 'reza',
+                checked: false
+            } 
+        },{
+           item:{
+                id: 'id13',
+                label: 'Lorem ipsum dolor 13',
+                checked: false
+            } ,
+            children: [{
                 item:{
-                    id: 'id1',
-                    label: 'test',
+                    id: 'id11',
+                    label: 'Lorem ipsum dolor 11',
                     checked: false
-                },
-                children: [{
-                   item:{
-                        id: 'id11',
-                        label: 'Lorem ipsum dolor 11',
-                        checked: false
-                    } 
-                },{
-                   item:{
-                        id: 'id12',
-                        label: 'reza',
-                        checked: false
-                    } 
-                },{
-                   item:{
-                        id: 'id13',
-                        label: 'Lorem ipsum dolor 13',
-                        checked: false
-                    } ,
-                    children: [{
-                        item:{
-                            id: 'id11',
-                            label: 'Lorem ipsum dolor 11',
-                            checked: false
-                        }
-                    },{
-                        item:{
-                            id: 'id12',
-                            label: 'reza',
-                            checked: false
-                        }
-                    },{
-                        item:{
-                            id: 'id13',
-                            label: 'Lorem ipsum dolor 13',
-                            checked: false
-                        }
-                    }]
-                }]
-            });
+                }
+            },{
+                item:{
+                    id: 'id12',
+                    label: 'reza',
+                    checked: false
+                }
+            },{
+                item:{
+                    id: 'id13',
+                    label: 'Lorem ipsum dolor 13',
+                    checked: false
+                }
+            }]
+        }]
+    });
             
     /* JAVASCRIPT */
     $('#tree-container').treeatriojs({
