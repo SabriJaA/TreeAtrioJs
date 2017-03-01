@@ -1,0 +1,3031 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>jQuery highchecktree Plugin Demo</title>
+		
+        <link rel="stylesheet" type="text/css" href="css/treeatriojs.css"/>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+        <style type="text/css">
+        body { font-family:'Open Sans'; font-size:14px;}
+            #main-container{
+                width: 600px;
+                margin:  150px auto;
+            }
+        </style>
+        
+    </head>
+    <body>
+       <div id="main-container">
+       <h1>jQuery TreeAtrioJs Plugin Demo</h1>
+        <button id="toggleTree" class="btn btn-default"></button>
+        <input type="text" class="filterinput form-control" placeholder="Search by text">
+        <div id="tree-container"></div>
+       </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script type="text/javascript" src="js/treeatriojs.js"></script>
+        <script>
+            var mockData = [];
+            mockData.push({
+                item:{
+                    id: 'id1',
+                    label: 'test',
+                    checked: false
+                },
+                children: [{
+                   item:{
+                        id: 'id11',
+                        label: 'Lorem ipsum dolor 11',
+                        checked: false
+                    } 
+                },{
+                   item:{
+                        id: 'id12',
+                        label: 'reza',
+                        checked: false
+                    } 
+                },{
+                   item:{
+                        id: 'id13',
+                        label: 'Lorem ipsum dolor 13',
+                        checked: false
+                    } ,
+                    children: [{
+                        item:{
+                            id: 'id11',
+                            label: 'Lorem ipsum dolor 11',
+                            checked: false
+                        }
+                    },{
+                        item:{
+                            id: 'id12',
+                            label: 'reza',
+                            checked: false
+                        }
+                    },{
+                        item:{
+                            id: 'id13',
+                            label: 'Lorem ipsum dolor 13',
+                            checked: false
+                        }
+                    }]
+                }]
+            });
+
+            mockData.push({
+                item:{
+                    id: 'id2',
+                    label: 'Lorem ipsum dolor 2',
+                    checked: false
+                },
+                children: [{
+                   item:{
+                        id: 'id21',
+                        label: 'Lorem ipsum dolor 21',
+                        checked: false
+                    } 
+                },{
+                   item:{
+                        id: 'id22',
+                        label: 'Lorem ipsum dolor 22',
+                        checked: true
+                    } 
+                },{
+                   item:{
+                        id: 'id23',
+                        label: 'Lorem ipsum dolor 23',
+                        checked: false
+                    } 
+                }]
+            });
+
+            mockData.push({
+                item:{
+                    id: 'id3',
+                    label: 'Lorem ipsum dolor 3',
+                    checked: false
+                },
+                children: [{
+                   item:{
+                        id: 'id31',
+                        label: 'Lorem ipsum dolor 31',
+                        checked: true
+                    } 
+                },{
+                   item:{
+                        id: 'id32',
+                        label: 'Lorem ipsum dolor 32',
+                        checked: false
+                    },
+                    children: [{
+                        item:{
+                            id: 'id321',
+                            label: 'Lorem ipsum dolor 321',
+                            checked: false
+                        }
+                    },{
+                        item:{
+                            id: 'id322',
+                            label: 'azert',
+                            checked: false
+                        },
+                        children: [{
+                            item:{
+                                id: 'id3221',
+                                label: 'Lorem ipsum dolor 3221',
+                                checked: false
+                            }
+                        },{
+                            item:{
+                                id: 'id3221',
+                                label: 'Lorem ipsum dolor 3222',
+                                checked: false
+                            }
+                        }]
+                    }]
+                }]
+            });
+
+            var dataAjax = [
+                {
+                    "item": {
+                        "id": "1",
+                        "label": "Staff",
+                        "checked": "false",
+                        "parent" : "true"
+                    },
+                    "children": [
+                        {
+                            "item": {
+                                "id": "1",
+                                "label": "Imputations",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "187": {
+                                    "item": {
+                                        "id": "187",
+                                        "label": "pouet",
+                                        "checked": "false"
+                                    }
+                                },
+                                "188": {
+                                    "item": {
+                                        "id": "188",
+                                        "label": "ajax_fill_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "189": {
+                                    "item": {
+                                        "id": "189",
+                                        "label": "ajax_save_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "190": {
+                                    "item": {
+                                        "id": "190",
+                                        "label": "ajax_delete_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "191": {
+                                    "item": {
+                                        "id": "191",
+                                        "label": "ajax_valid_period",
+                                        "checked": "false"
+                                    }
+                                },
+                                "192": {
+                                    "item": {
+                                        "id": "192",
+                                        "label": "ajax_invalid_period",
+                                        "checked": "false"
+                                    }
+                                },
+                                "193": {
+                                    "item": {
+                                        "id": "193",
+                                        "label": "ajax_fill_late_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "194": {
+                                    "item": {
+                                        "id": "194",
+                                        "label": "ajax_fill_late_validation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "213": {
+                                    "item": {
+                                        "id": "213",
+                                        "label": "ajax_fill_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "214": {
+                                    "item": {
+                                        "id": "214",
+                                        "label": "ajax_fill_active_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "217": {
+                                    "item": {
+                                        "id": "217",
+                                        "label": "ajax_fill_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "219": {
+                                    "item": {
+                                        "id": "219",
+                                        "label": "ajax_fill_remaining_duration_for_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "233": {
+                                    "item": {
+                                        "id": "233",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                },
+                                "235": {
+                                    "item": {
+                                        "id": "235",
+                                        "label": "ajax_fill_user_story",
+                                        "checked": "false"
+                                    }
+                                },
+                                "238": {
+                                    "item": {
+                                        "id": "238",
+                                        "label": "ajax_fill_sprint",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "item": {
+                                "id": "2",
+                                "label": "Abscences",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "195": {
+                                    "item": {
+                                        "id": "195",
+                                        "label": "ajax_fill_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "196": {
+                                    "item": {
+                                        "id": "196",
+                                        "label": "ajax_fill_all_pending_absences",
+                                        "checked": "false"
+                                    }
+                                },
+                                "197": {
+                                    "item": {
+                                        "id": "197",
+                                        "label": "ajax_save_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "198": {
+                                    "item": {
+                                        "id": "198",
+                                        "label": "ajax_delete_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "199": {
+                                    "item": {
+                                        "id": "199",
+                                        "label": "ajax_valid_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "200": {
+                                    "item": {
+                                        "id": "200",
+                                        "label": "ajax_invalid_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "211": {
+                                    "item": {
+                                        "id": "211",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "216": {
+                                    "item": {
+                                        "id": "216",
+                                        "label": "ajax_fill_absence_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "242": {
+                                    "item": {
+                                        "id": "242",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "347": {
+                                    "item": {
+                                        "id": "347",
+                                        "label": "ajax_fill_active_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "348": {
+                                    "item": {
+                                        "id": "348",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                },
+                                "349": {
+                                    "item": {
+                                        "id": "349",
+                                        "label": "ajax_change_selected_user",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "item": {
+                                "id": "3",
+                                "label": "Notes de frais",
+                                "checked": "false"
+                            },
+                            "children": [
+                                {
+                                    "item": {
+                                        "id": "201",
+                                        "label": "ajax_fill_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "202",
+                                        "label": "ajax_save_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "203",
+                                        "label": "ajax_duplicate_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "204",
+                                        "label": "ajax_delete_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "205",
+                                        "label": "ajax_upload_file_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "206",
+                                        "label": "ajax_fill_sum_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "207",
+                                        "label": "ajax_fill_costs_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "351",
+                                        "label": "ajax_fill_active_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "352",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "item": {
+                                "id": "4",
+                                "label": "Tableau de bord",
+                                "checked": "false"
+                            },
+                            "children": [
+                                {
+                                    "item": {
+                                        "id": "232",
+                                        "label": "ajax_fill_dashboard",
+                                        "checked": "false"
+                                    }
+                                },
+                                {
+                                    "item": {
+                                        "id": "350",
+                                        "label": "ajax_change_selected_user",
+                                        "checked": "false"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "item": {
+                        "id": "2",
+                        "label": "Projets",
+                        "checked": "false",
+                        "parent" : "true"
+                    },
+                    "children": {
+                        "10": {
+                            "item": {
+                                "id": "10",
+                                "label": "Sprint Backlog",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "3": {
+                                    "item": {
+                                        "id": "3",
+                                        "label": "ajax_save_affected_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "20": {
+                                    "item": {
+                                        "id": "20",
+                                        "label": "ajax_fill_active_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "22": {
+                                    "item": {
+                                        "id": "22",
+                                        "label": "ajax_fill_user_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "31": {
+                                    "item": {
+                                        "id": "31",
+                                        "label": "ajax_save_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "32": {
+                                    "item": {
+                                        "id": "32",
+                                        "label": "ajax_fill_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "33": {
+                                    "item": {
+                                        "id": "33",
+                                        "label": "ajax_fill_task_activity",
+                                        "checked": "false"
+                                    }
+                                },
+                                "43": {
+                                    "item": {
+                                        "id": "43",
+                                        "label": "ajax_import_task_to_sprint",
+                                        "checked": "false"
+                                    }
+                                },
+                                "44": {
+                                    "item": {
+                                        "id": "44",
+                                        "label": "ajax_save_comment_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "45": {
+                                    "item": {
+                                        "id": "45",
+                                        "label": "ajax_fill_comment_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "46": {
+                                    "item": {
+                                        "id": "46",
+                                        "label": "ajax_delete_comment_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "114": {
+                                    "item": {
+                                        "id": "114",
+                                        "label": "ajax_fill_task_category",
+                                        "checked": "false"
+                                    }
+                                },
+                                "115": {
+                                    "item": {
+                                        "id": "115",
+                                        "label": "ajax_upload_file_attached_file_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "116": {
+                                    "item": {
+                                        "id": "116",
+                                        "label": "ajax_fill_attached_file_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "117": {
+                                    "item": {
+                                        "id": "117",
+                                        "label": "ajax_save_attached_file_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "118": {
+                                    "item": {
+                                        "id": "118",
+                                        "label": "ajax_delete_attached_file_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "163": {
+                                    "item": {
+                                        "id": "163",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "166": {
+                                    "item": {
+                                        "id": "166",
+                                        "label": "ajax_fill_user_story",
+                                        "checked": "false"
+                                    }
+                                },
+                                "169": {
+                                    "item": {
+                                        "id": "169",
+                                        "label": "ajax_fill_sprint",
+                                        "checked": "false"
+                                    }
+                                },
+                                "170": {
+                                    "item": {
+                                        "id": "170",
+                                        "label": "ajax_fill_sprint_activity",
+                                        "checked": "false"
+                                    }
+                                },
+                                "173": {
+                                    "item": {
+                                        "id": "173",
+                                        "label": "ajax_save_state_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "346": {
+                                    "item": {
+                                        "id": "346",
+                                        "label": "ajax_staff_fill_task",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "11": {
+                            "item": {
+                                "id": "11",
+                                "label": "Sprints",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "39": {
+                                    "item": {
+                                        "id": "39",
+                                        "label": "ajax_fill_sum_task_time",
+                                        "checked": "false"
+                                    }
+                                },
+                                "171": {
+                                    "item": {
+                                        "id": "171",
+                                        "label": "ajax_save_sprint",
+                                        "checked": "false"
+                                    }
+                                },
+                                "172": {
+                                    "item": {
+                                        "id": "172",
+                                        "label": "ajax_delete_sprint",
+                                        "checked": "false"
+                                    }
+                                },
+                                "354": {
+                                    "item": {
+                                        "id": "354",
+                                        "label": "ajax_fill_sprint",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "12": {
+                            "item": {
+                                "id": "12",
+                                "label": "Users stories",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "167": {
+                                    "item": {
+                                        "id": "167",
+                                        "label": "ajax_save_user_story",
+                                        "checked": "false"
+                                    }
+                                },
+                                "168": {
+                                    "item": {
+                                        "id": "168",
+                                        "label": "ajax_delete_user_story",
+                                        "checked": "false"
+                                    }
+                                },
+                                "355": {
+                                    "item": {
+                                        "id": "355",
+                                        "label": "ajax_fill_user_story",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "13": {
+                            "item": {
+                                "id": "13",
+                                "label": "Tâches",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "2": {
+                                    "item": {
+                                        "id": "2",
+                                        "label": "ajax_fill_affected_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "4": {
+                                    "item": {
+                                        "id": "4",
+                                        "label": "ajax_delete_affected_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "34": {
+                                    "item": {
+                                        "id": "34",
+                                        "label": "ajax_duplicate_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "36": {
+                                    "item": {
+                                        "id": "36",
+                                        "label": "ajax_delete_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "37": {
+                                    "item": {
+                                        "id": "37",
+                                        "label": "ajax_validate_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "38": {
+                                    "item": {
+                                        "id": "38",
+                                        "label": "ajax_transform_task_to_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "94": {
+                                    "item": {
+                                        "id": "94",
+                                        "label": "ajax_fill_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "95": {
+                                    "item": {
+                                        "id": "95",
+                                        "label": "ajax_fill_imputations",
+                                        "checked": "false"
+                                    }
+                                },
+                                "96": {
+                                    "item": {
+                                        "id": "96",
+                                        "label": "ajax_save_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "97": {
+                                    "item": {
+                                        "id": "97",
+                                        "label": "ajax_delete_imputation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "357": {
+                                    "item": {
+                                        "id": "357",
+                                        "label": "ajax_fill_user_story",
+                                        "checked": "false"
+                                    }
+                                },
+                                "358": {
+                                    "item": {
+                                        "id": "358",
+                                        "label": "ajax_fill_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "359": {
+                                    "item": {
+                                        "id": "359",
+                                        "label": "ajax_fill_sprint",
+                                        "checked": "false"
+                                    }
+                                },
+                                "360": {
+                                    "item": {
+                                        "id": "360",
+                                        "label": "ajax_fill_task_category",
+                                        "checked": "false"
+                                    }
+                                },
+                                "361": {
+                                    "item": {
+                                        "id": "361",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "362": {
+                                    "item": {
+                                        "id": "362",
+                                        "label": "ajax_save_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "364": {
+                                    "item": {
+                                        "id": "364",
+                                        "label": "ajax_fill_user_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "365": {
+                                    "item": {
+                                        "id": "365",
+                                        "label": "ajax_save_affected_task",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "14": {
+                            "item": {
+                                "id": "14",
+                                "label": "Statistiques",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "11": {
+                                    "item": {
+                                        "id": "11",
+                                        "label": "ajax_fill_project_cost",
+                                        "checked": "false"
+                                    }
+                                },
+                                "353": {
+                                    "item": {
+                                        "id": "353",
+                                        "label": "ajax_fill_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "367": {
+                                    "item": {
+                                        "id": "367",
+                                        "label": "ajax_fill_sum_task_time",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "15": {
+                            "item": {
+                                "id": "15",
+                                "label": "Tickets",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "93": {
+                                    "item": {
+                                        "id": "93",
+                                        "label": "ajax_fill_project_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "176": {
+                                    "item": {
+                                        "id": "176",
+                                        "label": "ajax_fill_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "177": {
+                                    "item": {
+                                        "id": "177",
+                                        "label": "ajax_save_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "178": {
+                                    "item": {
+                                        "id": "178",
+                                        "label": "ajax_delete_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "179": {
+                                    "item": {
+                                        "id": "179",
+                                        "label": "ajax_upload_ckeditor_file_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "180": {
+                                    "item": {
+                                        "id": "180",
+                                        "label": "ajax_upload_ckeditor_file_comment_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "181": {
+                                    "item": {
+                                        "id": "181",
+                                        "label": "ajax_fill_type_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "182": {
+                                    "item": {
+                                        "id": "182",
+                                        "label": "ajax_fill_priority",
+                                        "checked": "false"
+                                    }
+                                },
+                                "368": {
+                                    "item": {
+                                        "id": "368",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "369": {
+                                    "item": {
+                                        "id": "369",
+                                        "label": "ajax_fill_task_category",
+                                        "checked": "false"
+                                    }
+                                },
+                                "370": {
+                                    "item": {
+                                        "id": "370",
+                                        "label": "ajax_fill_user_story",
+                                        "checked": "false"
+                                    }
+                                },
+                                "371": {
+                                    "item": {
+                                        "id": "371",
+                                        "label": "ajax_fill_sprint",
+                                        "checked": "false"
+                                    }
+                                },
+                                "372": {
+                                    "item": {
+                                        "id": "372",
+                                        "label": "ajax_fill_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "373": {
+                                    "item": {
+                                        "id": "373",
+                                        "label": "ajax_save_task",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "16": {
+                            "item": {
+                                "id": "16",
+                                "label": "Plannings",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "142": {
+                                    "item": {
+                                        "id": "142",
+                                        "label": "ajax_fill_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "143": {
+                                    "item": {
+                                        "id": "143",
+                                        "label": "ajax_fill_planning_view",
+                                        "checked": "false"
+                                    }
+                                },
+                                "144": {
+                                    "item": {
+                                        "id": "144",
+                                        "label": "ajax_export_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "145": {
+                                    "item": {
+                                        "id": "145",
+                                        "label": "ajax_save_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "146": {
+                                    "item": {
+                                        "id": "146",
+                                        "label": "ajax_delete_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "147": {
+                                    "item": {
+                                        "id": "147",
+                                        "label": "ajax_get_quotation_for_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "148": {
+                                    "item": {
+                                        "id": "148",
+                                        "label": "ajax_get_sheduled_tasks_for_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "149": {
+                                    "item": {
+                                        "id": "149",
+                                        "label": "ajax_set_synchronized_for_planning",
+                                        "checked": "false"
+                                    }
+                                },
+                                "150": {
+                                    "item": {
+                                        "id": "150",
+                                        "label": "ajax_update_planning_begin_date",
+                                        "checked": "false"
+                                    }
+                                },
+                                "151": {
+                                    "item": {
+                                        "id": "151",
+                                        "label": "ajax_update_planning_end_date",
+                                        "checked": "false"
+                                    }
+                                },
+                                "152": {
+                                    "item": {
+                                        "id": "152",
+                                        "label": "ajax_save_planning_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "153": {
+                                    "item": {
+                                        "id": "153",
+                                        "label": "ajax_delete_planning_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "154": {
+                                    "item": {
+                                        "id": "154",
+                                        "label": "ajax_sort_order_planning_task",
+                                        "checked": "false"
+                                    }
+                                },
+                                "155": {
+                                    "item": {
+                                        "id": "155",
+                                        "label": "ajax_save_planning_task_assignment",
+                                        "checked": "false"
+                                    }
+                                },
+                                "156": {
+                                    "item": {
+                                        "id": "156",
+                                        "label": "ajax_fill_planning_event",
+                                        "checked": "false"
+                                    }
+                                },
+                                "157": {
+                                    "item": {
+                                        "id": "157",
+                                        "label": "ajax_save_planning_event",
+                                        "checked": "false"
+                                    }
+                                },
+                                "158": {
+                                    "item": {
+                                        "id": "158",
+                                        "label": "ajax_delete_planning_event",
+                                        "checked": "false"
+                                    }
+                                },
+                                "159": {
+                                    "item": {
+                                        "id": "159",
+                                        "label": "ajax_save_planning_link",
+                                        "checked": "false"
+                                    }
+                                },
+                                "160": {
+                                    "item": {
+                                        "id": "160",
+                                        "label": "ajax_delete_planning_link",
+                                        "checked": "false"
+                                    }
+                                },
+                                "161": {
+                                    "item": {
+                                        "id": "161",
+                                        "label": "ajax_sort_order_planning_link",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "17": {
+                            "item": {
+                                "id": "17",
+                                "label": "Droits",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "23": {
+                                    "item": {
+                                        "id": "23",
+                                        "label": "ajax_fill_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "24": {
+                                    "item": {
+                                        "id": "24",
+                                        "label": "ajax_save_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "25": {
+                                    "item": {
+                                        "id": "25",
+                                        "label": "ajax_delete_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "30": {
+                                    "item": {
+                                        "id": "30",
+                                        "label": "ajax_fill_user_right",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "18": {
+                            "item": {
+                                "id": "18",
+                                "label": "Absences",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "99": {
+                                    "item": {
+                                        "id": "99",
+                                        "label": "ajax_fill_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "100": {
+                                    "item": {
+                                        "id": "100",
+                                        "label": "ajax_valid_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "101": {
+                                    "item": {
+                                        "id": "101",
+                                        "label": "ajax_invalid_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "102": {
+                                    "item": {
+                                        "id": "102",
+                                        "label": "ajax_save_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "103": {
+                                    "item": {
+                                        "id": "103",
+                                        "label": "ajax_delete_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "104": {
+                                    "item": {
+                                        "id": "104",
+                                        "label": "ajax_fill_absence_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "374": {
+                                    "item": {
+                                        "id": "374",
+                                        "label": "ajax_fill_project_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "375": {
+                                    "item": {
+                                        "id": "375",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "376": {
+                                    "item": {
+                                        "id": "376",
+                                        "label": "ajax_fill_active_project",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "19": {
+                            "item": {
+                                "id": "19",
+                                "label": "Tendances",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "6": {
+                                    "item": {
+                                        "id": "6",
+                                        "label": "ajax_fill_user_project_trend_graph",
+                                        "checked": "false"
+                                    }
+                                },
+                                "7": {
+                                    "item": {
+                                        "id": "7",
+                                        "label": "ajax_fill_task_project_trend_graph",
+                                        "checked": "false"
+                                    }
+                                },
+                                "16": {
+                                    "item": {
+                                        "id": "16",
+                                        "label": "ajax_fill_task_category_project_trend_graph",
+                                        "checked": "false"
+                                    }
+                                },
+                                "17": {
+                                    "item": {
+                                        "id": "17",
+                                        "label": "ajax_fill_project_trend",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "20": {
+                            "item": {
+                                "id": "20",
+                                "label": "Factures",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "21": {
+                                    "item": {
+                                        "id": "21",
+                                        "label": "ajax_extract_cra_for_users_by_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "50": {
+                                    "item": {
+                                        "id": "50",
+                                        "label": "ajax_fill_contact_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "65": {
+                                    "item": {
+                                        "id": "65",
+                                        "label": "ajax_fill_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "66": {
+                                    "item": {
+                                        "id": "66",
+                                        "label": "ajax_save_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "67": {
+                                    "item": {
+                                        "id": "67",
+                                        "label": "ajax_delete_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "68": {
+                                    "item": {
+                                        "id": "68",
+                                        "label": "ajax_duplicate_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "69": {
+                                    "item": {
+                                        "id": "69",
+                                        "label": "ajax_extract_invoice",
+                                        "checked": "false"
+                                    }
+                                },
+                                "70": {
+                                    "item": {
+                                        "id": "70",
+                                        "label": "ajax_generate_invoice",
+                                        "checked": "false"
+                                    }
+                                },
+                                "71": {
+                                    "item": {
+                                        "id": "71",
+                                        "label": "ajax_extract_csv_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "106": {
+                                    "item": {
+                                        "id": "106",
+                                        "label": "ajax_fill_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "107": {
+                                    "item": {
+                                        "id": "107",
+                                        "label": "ajax_save_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "108": {
+                                    "item": {
+                                        "id": "108",
+                                        "label": "ajax_delete_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "109": {
+                                    "item": {
+                                        "id": "109",
+                                        "label": "ajax_change_position_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "113": {
+                                    "item": {
+                                        "id": "113",
+                                        "label": "ajax_check_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "140": {
+                                    "item": {
+                                        "id": "140",
+                                        "label": "ajax_fill_contract_select",
+                                        "checked": "false"
+                                    }
+                                },
+                                "141": {
+                                    "item": {
+                                        "id": "141",
+                                        "label": "ajax_fill_contract_internal_number",
+                                        "checked": "false"
+                                    }
+                                },
+                                "377": {
+                                    "item": {
+                                        "id": "377",
+                                        "label": "ajax_fill_user_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "378": {
+                                    "item": {
+                                        "id": "378",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "21": {
+                            "item": {
+                                "id": "21",
+                                "label": "Devis",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "52": {
+                                    "item": {
+                                        "id": "52",
+                                        "label": "ajax_transform_quotation_to_invoice",
+                                        "checked": "false"
+                                    }
+                                },
+                                "53": {
+                                    "item": {
+                                        "id": "53",
+                                        "label": "ajax_extract_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "54": {
+                                    "item": {
+                                        "id": "54",
+                                        "label": "ajax_extract_content_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "55": {
+                                    "item": {
+                                        "id": "55",
+                                        "label": "ajax_verify_extract_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "379": {
+                                    "item": {
+                                        "id": "379",
+                                        "label": "ajax_fill_contact_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "380": {
+                                    "item": {
+                                        "id": "380",
+                                        "label": "ajax_fill_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "381": {
+                                    "item": {
+                                        "id": "381",
+                                        "label": "ajax_fill_contract_select",
+                                        "checked": "false"
+                                    }
+                                },
+                                "382": {
+                                    "item": {
+                                        "id": "382",
+                                        "label": "ajax_save_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "383": {
+                                    "item": {
+                                        "id": "383",
+                                        "label": "ajax_delete_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "384": {
+                                    "item": {
+                                        "id": "384",
+                                        "label": "ajax_fill_user_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "385": {
+                                    "item": {
+                                        "id": "385",
+                                        "label": "ajax_extract_csv_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "386": {
+                                    "item": {
+                                        "id": "386",
+                                        "label": "ajax_fill_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "387": {
+                                    "item": {
+                                        "id": "387",
+                                        "label": "ajax_check_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "388": {
+                                    "item": {
+                                        "id": "388",
+                                        "label": "ajax_save_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "389": {
+                                    "item": {
+                                        "id": "389",
+                                        "label": "ajax_delete_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "390": {
+                                    "item": {
+                                        "id": "390",
+                                        "label": "ajax_change_position_discount_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "391": {
+                                    "item": {
+                                        "id": "391",
+                                        "label": "ajax_duplicate_invoice_quotation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "392": {
+                                    "item": {
+                                        "id": "392",
+                                        "label": "ajax_extract_cra_for_users_by_project",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "22": {
+                            "item": {
+                                "id": "22",
+                                "label": "Factures fournisseurs",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "85": {
+                                    "item": {
+                                        "id": "85",
+                                        "label": "ajax_fill_invoice_supplier",
+                                        "checked": "false"
+                                    }
+                                },
+                                "86": {
+                                    "item": {
+                                        "id": "86",
+                                        "label": "ajax_save_invoice_supplier",
+                                        "checked": "false"
+                                    }
+                                },
+                                "87": {
+                                    "item": {
+                                        "id": "87",
+                                        "label": "ajax_delete_invoice_supplier",
+                                        "checked": "false"
+                                    }
+                                },
+                                "88": {
+                                    "item": {
+                                        "id": "88",
+                                        "label": "ajax_upload_file_invoice_supplier",
+                                        "checked": "false"
+                                    }
+                                },
+                                "89": {
+                                    "item": {
+                                        "id": "89",
+                                        "label": "ajax_extract_csv_invoice_supplier",
+                                        "checked": "false"
+                                    }
+                                },
+                                "129": {
+                                    "item": {
+                                        "id": "129",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "162": {
+                                    "item": {
+                                        "id": "162",
+                                        "label": "ajax_user_connected_associate",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "item": {
+                        "id": "3",
+                        "label": "Commercial",
+                        "checked": "false",
+                        "parent" : "true"
+                    },
+                    "children": {
+                        "5": {
+                            "item": {
+                                "id": "5",
+                                "label": "Rentabilité",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "247": {
+                                    "item": {
+                                        "id": "247",
+                                        "label": "ajax_fill_rentability",
+                                        "checked": "false"
+                                    }
+                                },
+                                "248": {
+                                    "item": {
+                                        "id": "248",
+                                        "label": "ajax_fill_intercontrat_detail",
+                                        "checked": "false"
+                                    }
+                                },
+                                "249": {
+                                    "item": {
+                                        "id": "249",
+                                        "label": "ajax_save_rentability_commercial",
+                                        "checked": "false"
+                                    }
+                                },
+                                "250": {
+                                    "item": {
+                                        "id": "250",
+                                        "label": "ajax_fill_rentability_commercial",
+                                        "checked": "false"
+                                    }
+                                },
+                                "251": {
+                                    "item": {
+                                        "id": "251",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "268": {
+                                    "item": {
+                                        "id": "268",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "6": {
+                            "item": {
+                                "id": "6",
+                                "label": "Société",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "253": {
+                                    "item": {
+                                        "id": "253",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "255": {
+                                    "item": {
+                                        "id": "255",
+                                        "label": "ajax_save_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "257": {
+                                    "item": {
+                                        "id": "257",
+                                        "label": "ajax_fill_country",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "7": {
+                            "item": {
+                                "id": "7",
+                                "label": "Contacts",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "259": {
+                                    "item": {
+                                        "id": "259",
+                                        "label": "ajax_fill_contact",
+                                        "checked": "false"
+                                    }
+                                },
+                                "260": {
+                                    "item": {
+                                        "id": "260",
+                                        "label": "ajax_save_contact",
+                                        "checked": "false"
+                                    }
+                                },
+                                "269": {
+                                    "item": {
+                                        "id": "269",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "8": {
+                            "item": {
+                                "id": "8",
+                                "label": "Clauses",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "258": {
+                                    "item": {
+                                        "id": "258",
+                                        "label": "ajax_fill_clause",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "9": {
+                            "item": {
+                                "id": "9",
+                                "label": "Employés",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "267": {
+                                    "item": {
+                                        "id": "267",
+                                        "label": "ajax_fill_kilometric_scale",
+                                        "checked": "false"
+                                    }
+                                },
+                                "356": {
+                                    "item": {
+                                        "id": "356",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "363": {
+                                    "item": {
+                                        "id": "363",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                },
+                                "366": {
+                                    "item": {
+                                        "id": "366",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "item": {
+                        "id": "4",
+                        "label": "Administration",
+                        "checked": "false",
+                        "parent" : "true"
+                    },
+                    "children": {
+                        "23": {
+                            "item": {
+                                "id": "23",
+                                "label": "Utilisateurs",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "271": {
+                                    "item": {
+                                        "id": "271",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "272": {
+                                    "item": {
+                                        "id": "272",
+                                        "label": "ajax_delete_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "276": {
+                                    "item": {
+                                        "id": "276",
+                                        "label": "ajax_save_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "277": {
+                                    "item": {
+                                        "id": "277",
+                                        "label": "ajax_fill_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "279": {
+                                    "item": {
+                                        "id": "279",
+                                        "label": "ajax_fill_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "280": {
+                                    "item": {
+                                        "id": "280",
+                                        "label": "ajax_save_project_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "295": {
+                                    "item": {
+                                        "id": "295",
+                                        "label": "ajax_fill_user_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "298": {
+                                    "item": {
+                                        "id": "298",
+                                        "label": "ajax_fill_affected_user_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "299": {
+                                    "item": {
+                                        "id": "299",
+                                        "label": "ajax_save_affected_user_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "300": {
+                                    "item": {
+                                        "id": "300",
+                                        "label": "ajax_delete_affected_user_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "301": {
+                                    "item": {
+                                        "id": "301",
+                                        "label": "ajax_fill_affected_commercial",
+                                        "checked": "false"
+                                    }
+                                },
+                                "302": {
+                                    "item": {
+                                        "id": "302",
+                                        "label": "ajax_save_affected_commercial",
+                                        "checked": "false"
+                                    }
+                                },
+                                "303": {
+                                    "item": {
+                                        "id": "303",
+                                        "label": "ajax_delete_affected_commercial",
+                                        "checked": "false"
+                                    }
+                                },
+                                "304": {
+                                    "item": {
+                                        "id": "304",
+                                        "label": "ajax_fill_user_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "316": {
+                                    "item": {
+                                        "id": "316",
+                                        "label": "ajax_fill_kilometric_scale",
+                                        "checked": "false"
+                                    }
+                                },
+                                "323": {
+                                    "item": {
+                                        "id": "323",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "324": {
+                                    "item": {
+                                        "id": "324",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "24": {
+                            "item": {
+                                "id": "24",
+                                "label": "Agences",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "325": {
+                                    "item": {
+                                        "id": "325",
+                                        "label": "ajax_save_agency",
+                                        "checked": "false"
+                                    }
+                                },
+                                "326": {
+                                    "item": {
+                                        "id": "326",
+                                        "label": "ajax_delete_agency",
+                                        "checked": "false"
+                                    }
+                                },
+                                "510": {
+                                    "item": {
+                                        "id": "510",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "25": {
+                            "item": {
+                                "id": "25",
+                                "label": "Types d'utilisateurs",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "296": {
+                                    "item": {
+                                        "id": "296",
+                                        "label": "ajax_save_user_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "297": {
+                                    "item": {
+                                        "id": "297",
+                                        "label": "ajax_delete_user_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "511": {
+                                    "item": {
+                                        "id": "511",
+                                        "label": "ajax_fill_user_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "26": {
+                            "item": {
+                                "id": "26",
+                                "label": "Droits",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "305": {
+                                    "item": {
+                                        "id": "305",
+                                        "label": "ajax_save_user_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "306": {
+                                    "item": {
+                                        "id": "306",
+                                        "label": "ajax_delete_user_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "512": {
+                                    "item": {
+                                        "id": "512",
+                                        "label": "ajax_fill_user_right",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "27": {
+                            "item": {
+                                "id": "27",
+                                "label": "Types d'absence",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "285": {
+                                    "item": {
+                                        "id": "285",
+                                        "label": "ajax_fill_absence_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "286": {
+                                    "item": {
+                                        "id": "286",
+                                        "label": "ajax_save_absence_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "287": {
+                                    "item": {
+                                        "id": "287",
+                                        "label": "ajax_delete_absence_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "28": {
+                            "item": {
+                                "id": "28",
+                                "label": "Types de projet",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "288": {
+                                    "item": {
+                                        "id": "288",
+                                        "label": "ajax_fill_project_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "289": {
+                                    "item": {
+                                        "id": "289",
+                                        "label": "ajax_save_project_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "290": {
+                                    "item": {
+                                        "id": "290",
+                                        "label": "ajax_delete_project_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "29": {
+                            "item": {
+                                "id": "29",
+                                "label": "Types de véhicule",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "291": {
+                                    "item": {
+                                        "id": "291",
+                                        "label": "ajax_fill_vehicle_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "292": {
+                                    "item": {
+                                        "id": "292",
+                                        "label": "ajax_save_vehicle_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "293": {
+                                    "item": {
+                                        "id": "293",
+                                        "label": "ajax_delete_vehicle_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "30": {
+                            "item": {
+                                "id": "30",
+                                "label": "Puissances fiscale",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "307": {
+                                    "item": {
+                                        "id": "307",
+                                        "label": "ajax_fill_fiscal_horsepower",
+                                        "checked": "false"
+                                    }
+                                },
+                                "308": {
+                                    "item": {
+                                        "id": "308",
+                                        "label": "ajax_save_fiscal_horsepower",
+                                        "checked": "false"
+                                    }
+                                },
+                                "309": {
+                                    "item": {
+                                        "id": "309",
+                                        "label": "ajax_delete_fiscal_horsepower",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "31": {
+                            "item": {
+                                "id": "31",
+                                "label": "Echelles kilometriques",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "317": {
+                                    "item": {
+                                        "id": "317",
+                                        "label": "ajax_save_kilometric_scale",
+                                        "checked": "false"
+                                    }
+                                },
+                                "318": {
+                                    "item": {
+                                        "id": "318",
+                                        "label": "ajax_delete_kilometric_scale",
+                                        "checked": "false"
+                                    }
+                                },
+                                "847": {
+                                    "item": {
+                                        "id": "847",
+                                        "label": "ajax_fill_vehicle_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "848": {
+                                    "item": {
+                                        "id": "848",
+                                        "label": "ajax_fill_fiscal_horsepower",
+                                        "checked": "false"
+                                    }
+                                },
+                                "849": {
+                                    "item": {
+                                        "id": "849",
+                                        "label": "ajax_fill_kilometric_scale",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "32": {
+                            "item": {
+                                "id": "32",
+                                "label": "Etats",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "310": {
+                                    "item": {
+                                        "id": "310",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "311": {
+                                    "item": {
+                                        "id": "311",
+                                        "label": "ajax_save_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "312": {
+                                    "item": {
+                                        "id": "312",
+                                        "label": "ajax_delete_state",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "33": {
+                            "item": {
+                                "id": "33",
+                                "label": "Priorités",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "313": {
+                                    "item": {
+                                        "id": "313",
+                                        "label": "ajax_fill_priority",
+                                        "checked": "false"
+                                    }
+                                },
+                                "314": {
+                                    "item": {
+                                        "id": "314",
+                                        "label": "ajax_save_priority",
+                                        "checked": "false"
+                                    }
+                                },
+                                "315": {
+                                    "item": {
+                                        "id": "315",
+                                        "label": "ajax_delete_priority",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "35": {
+                            "item": {
+                                "id": "35",
+                                "label": "Type de tickets",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "337": {
+                                    "item": {
+                                        "id": "337",
+                                        "label": "ajax_fill_type_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "338": {
+                                    "item": {
+                                        "id": "338",
+                                        "label": "ajax_save_type_ticket",
+                                        "checked": "false"
+                                    }
+                                },
+                                "339": {
+                                    "item": {
+                                        "id": "339",
+                                        "label": "ajax_delete_type_ticket",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "36": {
+                            "item": {
+                                "id": "36",
+                                "label": "Etats de projets",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "330": {
+                                    "item": {
+                                        "id": "330",
+                                        "label": "ajax_fill_state_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "331": {
+                                    "item": {
+                                        "id": "331",
+                                        "label": "ajax_save_state_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "332": {
+                                    "item": {
+                                        "id": "332",
+                                        "label": "ajax_delete_state_project",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "37": {
+                            "item": {
+                                "id": "37",
+                                "label": "Pays",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "327": {
+                                    "item": {
+                                        "id": "327",
+                                        "label": "ajax_fill_country",
+                                        "checked": "false"
+                                    }
+                                },
+                                "328": {
+                                    "item": {
+                                        "id": "328",
+                                        "label": "ajax_save_country",
+                                        "checked": "false"
+                                    }
+                                },
+                                "329": {
+                                    "item": {
+                                        "id": "329",
+                                        "label": "ajax_delete_country",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "38": {
+                            "item": {
+                                "id": "38",
+                                "label": "Configurations",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "319": {
+                                    "item": {
+                                        "id": "319",
+                                        "label": "ajax_fill_configuration",
+                                        "checked": "false"
+                                    }
+                                },
+                                "320": {
+                                    "item": {
+                                        "id": "320",
+                                        "label": "ajax_save_configuration",
+                                        "checked": "false"
+                                    }
+                                },
+                                "321": {
+                                    "item": {
+                                        "id": "321",
+                                        "label": "ajax_delete_configuration",
+                                        "checked": "false"
+                                    }
+                                },
+                                "322": {
+                                    "item": {
+                                        "id": "322",
+                                        "label": "ajax_update_configuration",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "39": {
+                            "item": {
+                                "id": "39",
+                                "label": "Catégories de tâches",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "343": {
+                                    "item": {
+                                        "id": "343",
+                                        "label": "ajax_fill_task_category",
+                                        "checked": "false"
+                                    }
+                                },
+                                "344": {
+                                    "item": {
+                                        "id": "344",
+                                        "label": "ajax_save_task_category",
+                                        "checked": "false"
+                                    }
+                                },
+                                "345": {
+                                    "item": {
+                                        "id": "345",
+                                        "label": "ajax_delete_task_category",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "40": {
+                            "item": {
+                                "id": "40",
+                                "label": "Compétences",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "340": {
+                                    "item": {
+                                        "id": "340",
+                                        "label": "ajax_fill_skill",
+                                        "checked": "false"
+                                    }
+                                },
+                                "341": {
+                                    "item": {
+                                        "id": "341",
+                                        "label": "ajax_save_skill",
+                                        "checked": "false"
+                                    }
+                                },
+                                "342": {
+                                    "item": {
+                                        "id": "342",
+                                        "label": "ajax_delete_skill",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "53": {
+                            "item": {
+                                "id": "53",
+                                "label": "Gestion de droits",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "864": {
+                                    "item": {
+                                        "id": "864",
+                                        "label": "ajax_fill_manage_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "865": {
+                                    "item": {
+                                        "id": "865",
+                                        "label": "ajax_delete_manage_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "866": {
+                                    "item": {
+                                        "id": "866",
+                                        "label": "ajax_save_manage_right",
+                                        "checked": "false"
+                                    }
+                                },
+                                "868": {
+                                    "item": {
+                                        "id": "868",
+                                        "label": "ajax_fill_manage_right_permissions",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "54": {
+                            "item": {
+                                "id": "54",
+                                "label": "Gestion des permissions",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "867": {
+                                    "item": {
+                                        "id": "867",
+                                        "label": "ajax_fill_manage_right_permissions",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "item": {
+                        "id": "5",
+                        "label": "Financier",
+                        "checked": "false",
+                        "parent" : "true"
+                    },
+                    "children": {
+                        "41": {
+                            "item": {
+                                "id": "41",
+                                "label": "Types de paiements",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "400": {
+                                    "item": {
+                                        "id": "400",
+                                        "label": "ajax_fill_payment_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "401": {
+                                    "item": {
+                                        "id": "401",
+                                        "label": "ajax_save_payment_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "402": {
+                                    "item": {
+                                        "id": "402",
+                                        "label": "ajax_delete_payment_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "42": {
+                            "item": {
+                                "id": "42",
+                                "label": "Types de couts",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "421": {
+                                    "item": {
+                                        "id": "421",
+                                        "label": "ajax_fill_costs_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "422": {
+                                    "item": {
+                                        "id": "422",
+                                        "label": "ajax_save_costs_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "423": {
+                                    "item": {
+                                        "id": "423",
+                                        "label": "ajax_delete_costs_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "43": {
+                            "item": {
+                                "id": "43",
+                                "label": "Notes de frais",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "403": {
+                                    "item": {
+                                        "id": "403",
+                                        "label": "ajax_fill_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "404": {
+                                    "item": {
+                                        "id": "404",
+                                        "label": "ajax_save_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "405": {
+                                    "item": {
+                                        "id": "405",
+                                        "label": "ajax_delete_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "406": {
+                                    "item": {
+                                        "id": "406",
+                                        "label": "ajax_upload_file_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "407": {
+                                    "item": {
+                                        "id": "407",
+                                        "label": "ajax_fill_sum_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "408": {
+                                    "item": {
+                                        "id": "408",
+                                        "label": "ajax_export_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "409": {
+                                    "item": {
+                                        "id": "409",
+                                        "label": "ajax_extract_csv_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "410": {
+                                    "item": {
+                                        "id": "410",
+                                        "label": "ajax_duplicate_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "411": {
+                                    "item": {
+                                        "id": "411",
+                                        "label": "ajax_fill_state_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "412": {
+                                    "item": {
+                                        "id": "412",
+                                        "label": "ajax_save_state_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "413": {
+                                    "item": {
+                                        "id": "413",
+                                        "label": "ajax_delete_state_expense",
+                                        "checked": "false"
+                                    }
+                                },
+                                "457": {
+                                    "item": {
+                                        "id": "457",
+                                        "label": "ajax_fill_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "459": {
+                                    "item": {
+                                        "id": "459",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "498": {
+                                    "item": {
+                                        "id": "498",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "507": {
+                                    "item": {
+                                        "id": "507",
+                                        "label": "ajax_fill_costs_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "44": {
+                            "item": {
+                                "id": "44",
+                                "label": "Banque",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "414": {
+                                    "item": {
+                                        "id": "414",
+                                        "label": "ajax_fill_banking_operation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "415": {
+                                    "item": {
+                                        "id": "415",
+                                        "label": "ajax_fill_banking_operation_trend",
+                                        "checked": "false"
+                                    }
+                                },
+                                "416": {
+                                    "item": {
+                                        "id": "416",
+                                        "label": "ajax_save_banking_operation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "417": {
+                                    "item": {
+                                        "id": "417",
+                                        "label": "ajax_delete_banking_operation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "418": {
+                                    "item": {
+                                        "id": "418",
+                                        "label": "ajax_upload_csv_banking_operation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "419": {
+                                    "item": {
+                                        "id": "419",
+                                        "label": "ajax_import_banking_operation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "420": {
+                                    "item": {
+                                        "id": "420",
+                                        "label": "ajax_export_banking_operation",
+                                        "checked": "false"
+                                    }
+                                },
+                                "502": {
+                                    "item": {
+                                        "id": "502",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                },
+                                "508": {
+                                    "item": {
+                                        "id": "508",
+                                        "label": "ajax_fill_costs_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "509": {
+                                    "item": {
+                                        "id": "509",
+                                        "label": "ajax_fill_payment_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "846": {
+                                    "item": {
+                                        "id": "846",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "45": {
+                            "item": {
+                                "id": "45",
+                                "label": "Factures",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "439": {
+                                    "item": {
+                                        "id": "439",
+                                        "label": "ajax_fill_invoice_late",
+                                        "checked": "false"
+                                    }
+                                },
+                                "448": {
+                                    "item": {
+                                        "id": "448",
+                                        "label": "ajax_fill_contact",
+                                        "checked": "false"
+                                    }
+                                },
+                                "449": {
+                                    "item": {
+                                        "id": "449",
+                                        "label": "ajax_fill_invoice_supplier_late",
+                                        "checked": "false"
+                                    }
+                                },
+                                "450": {
+                                    "item": {
+                                        "id": "450",
+                                        "label": "ajax_extract_csv_invoice_supplier_late",
+                                        "checked": "false"
+                                    }
+                                },
+                                "850": {
+                                    "item": {
+                                        "id": "850",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "851": {
+                                    "item": {
+                                        "id": "851",
+                                        "label": "ajax_fill_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "852": {
+                                    "item": {
+                                        "id": "852",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "861": {
+                                    "item": {
+                                        "id": "861",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "46": {
+                            "item": {
+                                "id": "46",
+                                "label": "Utilisateurs",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "399": {
+                                    "item": {
+                                        "id": "399",
+                                        "label": "ajax_fill_user_wages_graph",
+                                        "checked": "false"
+                                    }
+                                },
+                                "469": {
+                                    "item": {
+                                        "id": "469",
+                                        "label": "ajax_fill_kilometric_scale",
+                                        "checked": "false"
+                                    }
+                                },
+                                "481": {
+                                    "item": {
+                                        "id": "481",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                },
+                                "853": {
+                                    "item": {
+                                        "id": "853",
+                                        "label": "ajax_fill_user",
+                                        "checked": "false"
+                                    }
+                                },
+                                "854": {
+                                    "item": {
+                                        "id": "854",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "47": {
+                            "item": {
+                                "id": "47",
+                                "label": "Kilomètres",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "468": {
+                                    "item": {
+                                        "id": "468",
+                                        "label": "ajax_fill_kilometer",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "48": {
+                            "item": {
+                                "id": "48",
+                                "label": "Abscences",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "470": {
+                                    "item": {
+                                        "id": "470",
+                                        "label": "ajax_fill_absence",
+                                        "checked": "false"
+                                    }
+                                },
+                                "472": {
+                                    "item": {
+                                        "id": "472",
+                                        "label": "ajax_fill_absence_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "855": {
+                                    "item": {
+                                        "id": "855",
+                                        "label": "ajax_fill_state",
+                                        "checked": "false"
+                                    }
+                                },
+                                "856": {
+                                    "item": {
+                                        "id": "856",
+                                        "label": "ajax_fill_agency",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "49": {
+                            "item": {
+                                "id": "49",
+                                "label": "Contrats",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "482": {
+                                    "item": {
+                                        "id": "482",
+                                        "label": "ajax_fill_contract_table",
+                                        "checked": "false"
+                                    }
+                                },
+                                "483": {
+                                    "item": {
+                                        "id": "483",
+                                        "label": "ajax_fill_contract_select",
+                                        "checked": "false"
+                                    }
+                                },
+                                "484": {
+                                    "item": {
+                                        "id": "484",
+                                        "label": "ajax_save_contract",
+                                        "checked": "false"
+                                    }
+                                },
+                                "485": {
+                                    "item": {
+                                        "id": "485",
+                                        "label": "ajax_delete_contract",
+                                        "checked": "false"
+                                    }
+                                },
+                                "503": {
+                                    "item": {
+                                        "id": "503",
+                                        "label": "ajax_fill_contract_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "857": {
+                                    "item": {
+                                        "id": "857",
+                                        "label": "ajax_fill_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "858": {
+                                    "item": {
+                                        "id": "858",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "50": {
+                            "item": {
+                                "id": "50",
+                                "label": "Types de contrat",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "504": {
+                                    "item": {
+                                        "id": "504",
+                                        "label": "ajax_save_contract_type",
+                                        "checked": "false"
+                                    }
+                                },
+                                "859": {
+                                    "item": {
+                                        "id": "859",
+                                        "label": "ajax_fill_contract_type",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "51": {
+                            "item": {
+                                "id": "51",
+                                "label": "Clauses",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "478": {
+                                    "item": {
+                                        "id": "478",
+                                        "label": "ajax_fill_clause",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        },
+                        "52": {
+                            "item": {
+                                "id": "52",
+                                "label": "Plus ...",
+                                "checked": "false"
+                            },
+                            "children": {
+                                "488": {
+                                    "item": {
+                                        "id": "488",
+                                        "label": "ajax_fill_check_tva",
+                                        "checked": "false"
+                                    }
+                                },
+                                "862": {
+                                    "item": {
+                                        "id": "862",
+                                        "label": "ajax_fill_project",
+                                        "checked": "false"
+                                    }
+                                },
+                                "863": {
+                                    "item": {
+                                        "id": "863",
+                                        "label": "ajax_fill_company",
+                                        "checked": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ];
+            
+            $('#tree-container').treeatriojs({
+                data: dataAjax,
+                buttonId: "toggleTree",
+                labelExpand: "Tout ouvrir", // an event will be triggered when mouse hover out the label
+                labelCollapse: "Tout fermer",
+                searchClass: "filterinput"
+            });
+        </script> 
+</body>
+</html>

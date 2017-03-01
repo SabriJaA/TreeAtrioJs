@@ -1,0 +1,110 @@
+#tree-container{
+	width:633px;
+}
+.checktree, .checktree *{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.checktree ul {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.checktree li {
+  float: left;
+  padding: 1px 0;
+    display: inline-block;
+    width: 95%;
+}
+
+.checktree li li{
+    margin-left: 5%;
+}
+.checktree li .item-container{
+    width: 100%;
+    float: left;
+    border: 1px solid #ececec;
+}
+
+.checktree li label.arrow  {
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 4px 0 2px 0;
+  font-size: 14px;
+  line-height: 15px;
+  float: left;
+  cursor: pointer;
+  transition: .2s all ease;
+}
+.checktree li label{
+    display: block;
+    width: 85%;
+    position: relative;
+}
+.checktree li label.arrow:hover{
+  color: red;
+}
+.checktree li .collapsed:after {
+    content: "\f067";
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 0;
+	color:#ccc;
+}
+
+.checktree li .expanded:after {
+    content: "\f068";
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 0;
+	color:#ccc;
+}
+
+.checktree li .checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  float: left;
+  background: url(checktree_icon.png) no-repeat;
+  background-position: 1px 0;
+  margin-right: 7px;
+}
+
+.checktree li .checked {
+  background-position: -15px 0;
+}
+
+.checktree li .half_checked {
+  background-position: -31px 0;
+}
+
+.checktree li li .arrow {
+  margin-left: 24px;
+}
+
+.checktree li li li .arrow {
+  margin-left: 48px;
+}
+
+.checktree li li li li .arrow {
+  margin-left: 72px;
+}
+
+.checktree li li li li li .arrow {
+  margin-left: 96px;
+}
+
+.checktree .checkbox{
+	margin-top:0;
+}
+.filterinput.form-control{
+	float:right; width:60%;
+}
+.checktree li.root > .item-container{
+	background-color:#f7f7f7 !important;
+}
