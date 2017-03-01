@@ -11,23 +11,18 @@
 This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
 
 ### Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
+# CSS
 ```sh
-$ cd dillinger
-$ npm install -d
-$ node app
+  <link rel="stylesheet" type="text/css" href="css/treeatriojs.css"/>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 ```
-
-For production environments...
+#JS
 
 ```sh
-$ npm install --production
-$ npm run predeploy
-$ NODE_ENV=production node app
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script type="text/javascript" src="js/treeatriojs.js"></script>
 ```
 
 ### Plugins
